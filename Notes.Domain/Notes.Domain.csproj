@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\!Projects\My Src\!Git\Notes.Backend\Notes.Domain\Notes.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
