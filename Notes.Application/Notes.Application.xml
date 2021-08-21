@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notes.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Notes.Application.Common.Exceptions.NotFoundException">
+            <summary>
+            Исключение - Сущность не найдена
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Common.Exceptions.NotFoundException.#ctor(System.String,System.Object)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="name">имя сущности</param>
+            <param name="key">ключ</param>
+        </member>
+        <member name="T:Notes.Application.Common.Mappings.AssemblyMappingProfile">
+            <summary>
+            Создание автомаперов из сборки
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Common.Mappings.AssemblyMappingProfile.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Создание автомаперов
+            </summary>
+            <param name="assembly">сборка</param>
+        </member>
+        <member name="M:Notes.Application.Common.Mappings.AssemblyMappingProfile.ApplyMappingsFromAssebmly(System.Reflection.Assembly)">
+            <summary>
+            Ядро автомапера
+            </summary>
+            <param name="assembly">сборка</param>
+        </member>
+        <member name="T:Notes.Application.Common.Mappings.IMapWith`1">
+            <summary>
+            Интефейс маппинга
+            </summary>
+            <typeparam name="T">какую сущность надо смапить на другую</typeparam>
+        </member>
+        <member name="M:Notes.Application.Common.Mappings.IMapWith`1.Mapping(AutoMapper.Profile)">
+            <summary>
+            Отобразить
+            </summary>
+            <param name="profile">профиль маппинга</param>
+        </member>
+        <member name="T:Notes.Application.DependencyInjection">
+            <summary>
+            Класс для методов раширения
+            </summary>
+        </member>
+        <member name="M:Notes.Application.DependencyInjection.AddApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Добавить поддержку паттерна Медиатор
+            </summary>
+            <param name="services">коллекция сервисов</param>
+            <returns>коллекция сервисов</returns>
+        </member>
+        <member name="T:Notes.Application.Interfaces.INotesDbContext">
+            <summary>
+            Интерфейс для связи обектов и сущностей базы данных
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Interfaces.INotesDbContext.Notes">
+            <summary>
+            Коллекция заметок
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Interfaces.INotesDbContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Сохранить изменения асинхронно
+            </summary>
+            <param name="cancelationToken">токен отмены</param>
+            <returns>количество сохраненных записей</returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommand">
+            <summary>
+            Команда - создание заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommand.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommand.Title">
+            <summary>
+            Заголовок заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommand.Details">
+            <summary>
+            Детали заметки
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandHandler">
+            <summary>
+            Обработчик для команды Создать Заметку
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandHandler._dbContext">
+            <summary>
+            Контекст базы данных
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandHandler.#ctor(Notes.Application.Interfaces.INotesDbContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="dbContext">контекст бд</param>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandHandler.Handle(Notes.Application.Notes.Commands.CreateNote.CreateNoteCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработать
+            </summary>
+            <param name="request">команда</param>
+            <param name="cancellationToken">токен отмены</param>
+            <returns>идентификатор заметки</returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommand">
+            <summary>
+            Команда - Удалить заметку
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommand.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommand.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandHandler">
+            <summary>
+            Обработчик команды удаления заметки
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandHandler._dbContext">
+            <summary>
+            Контекст базы данных
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandHandler.#ctor(Notes.Application.Interfaces.INotesDbContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="dbContext">контекст бд</param>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandHandler.Handle(Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработка команды удаления
+            </summary>
+            <param name="request">команда</param>
+            <param name="cancellationToken">токен отмены</param>
+            <returns>аналог void</returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand">
+            <summary>
+            Команда - Обновить заметку
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand.Details">
+            <summary>
+            Детали (содержимое заметки)
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandHandler">
+            <summary>
+            Обработчик для команды - Обновление Заметки
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandHandler._dbContext">
+            <summary>
+            Контекст базы данных
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandHandler.#ctor(Notes.Application.Interfaces.INotesDbContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="dbContext">контекст бд</param>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandHandler.Handle(Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand,System.Threading.CancellationToken)">
+            <summary>
+            Обработать команду
+            </summary>
+            <param name="request">команда</param>
+            <param name="cancellationToken">токет отмены</param>
+            <returns>аналог void</returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQuery">
+            <summary>
+            Запрос - Детали заметок
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQuery.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQuery.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryHandler">
+            <summary>
+            Обработчик запроса списка заметок
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryHandler._dbContext">
+            <summary>
+            Контекст базы данных
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryHandler._mapper">
+            <summary>
+            Маппер
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryHandler.#ctor(Notes.Application.Interfaces.INotesDbContext,AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="dbContext">контекст бд</param>
+            <param name="mapper">автомаппер</param>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryHandler.Handle(Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQuery,System.Threading.CancellationToken)">
+            <summary>
+            Обработка запроса о деталях заметок
+            </summary>
+            <param name="request">запрос</param>
+            <param name="cancellationToken">токен отмены</param>
+            <returns></returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm">
+            <summary>
+            View Model Заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.Details">
+            <summary>
+            Детали (содержимое заметки)
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.CreationDate">
+            <summary>
+            Дата созадания заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.EditDate">
+            <summary>
+            Дата изменения заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm.Mapping(AutoMapper.Profile)">
+            <summary>
+            Выполнить маппинг
+            </summary>
+            <param name="profile">профиль автомаппера</param>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQuery">
+            <summary>
+            Запрос заметок пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQuery.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryHandler">
+            <summary>
+            Обработчик запроса на получение списка заметок пользователя
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryHandler._dbContext">
+            <summary>
+            Контекст базы данных
+            </summary>
+        </member>
+        <member name="F:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryHandler._mapper">
+            <summary>
+            Маппер
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryHandler.#ctor(Notes.Application.Interfaces.INotesDbContext,AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="dbContext">контекст бд</param>
+            <param name="mapper">автомаппер</param>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryHandler.Handle(Notes.Application.Notes.Queries.GetNoteList.GetNoteListQuery,System.Threading.CancellationToken)">
+            <summary>
+            Обработать запрос - список заметок пользователя
+            </summary>
+            <param name="request">запрос</param>
+            <param name="cancellationToken">токен отмены</param>
+            <returns></returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteList.NoteListVm">
+            <summary>
+            View Model для заметок
+            </summary>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteList.NoteLookupDto">
+            <summary>
+            Представление о Заметке
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteList.NoteLookupDto.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Application.Notes.Queries.GetNoteList.NoteLookupDto.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteList.NoteLookupDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Выполнить маппинг
+            </summary>
+            <param name="profile">профиль автомаппера</param>
+        </member>
+    </members>
+</doc>

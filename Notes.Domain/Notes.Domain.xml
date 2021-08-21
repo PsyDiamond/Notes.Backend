@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notes.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Notes.Domain.Note">
+            <summary>
+            Заметка
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.Details">
+            <summary>
+            Детали (содержимое заметки)
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.CreationDate">
+            <summary>
+            Дата созадания заметки
+            </summary>
+        </member>
+        <member name="P:Notes.Domain.Note.EditDate">
+            <summary>
+            Дата изменения заметки
+            </summary>
+        </member>
+    </members>
+</doc>

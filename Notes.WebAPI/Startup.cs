@@ -1,55 +1,91 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Notes.Application;
+using Notes.Application.Common.Mappings;
+using Notes.Application.Interfaces;
+using Notes.Persistence;
+using System.Reflection;
 
 namespace Notes.WebAPI
 {
+    /// <summary>
+    /// Конфигурация приложения
+    /// </summary>
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+        /// <summary>
+        /// Файл конфигурации
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="configuration">конфигурация из файла</param>
+        public Startup(IConfiguration configuration) 
+            => Configuration = configuration;
+
+
+        /// <summary>
+        /// Конфигурация сервисов
+        /// </summary>
+        /// <param name="services">коллекция сервисов</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            // Автомаппер
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+                config.AddProfile(new AssemblyMappingProfile(typeof(INotesDbContext).Assembly));
+            });
+
+            // Медиатор
+            services.AddApplication();
+
+            // Хранение данных
+            services.AddPersistence(Configuration);
+
+            // Права доступа к сайту
+            services.AddCors(options => {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
+                });
+            });
+
+            // Контроллеры
+            services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Конфигурация конвеера исполнения
+        /// </summary>
+        /// <param name="app">построитель приложений</param>
+        /// <param name="env">окружение</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Если собрано в Debug - выводить исключения в явном виде
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
+            // Включает EndpointRoutingMiddleware
             app.UseRouting();
 
-            app.UseAuthorization();
+            // Перенаправление с HTTP на HTTPS
+            app.UseHttpsRedirection();
 
+            // Применение прав доступа к сайту
+            app.UseCors("AllowAll");
+
+            // Включение контроллеров
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

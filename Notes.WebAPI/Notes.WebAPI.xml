@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notes.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:Notes.WebAPI.Controllers.BaseController">
+            <summary>
+            Базовый класс для контроллеров
+            </summary>
+        </member>
+        <member name="F:Notes.WebAPI.Controllers.BaseController._mediator">
+            <summary>
+            В данно реализации - MediatR
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Controllers.BaseController.Mediator">
+            <summary>
+            Медиатор - Для обработки команд и запросов
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Controllers.BaseController.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="T:Notes.WebAPI.Controllers.NoteController">
+            <summary>
+            КОнтроллер для Заметок
+            </summary>
+        </member>
+        <member name="F:Notes.WebAPI.Controllers.NoteController._mapper">
+            <summary>
+            Автомаппер
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.#ctor(AutoMapper.IMapper)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="mapper">автомаппер</param>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.GetAll">
+            <summary>
+            Получить список заметок
+            </summary>
+            <returns>вьюха с заметками</returns>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.Get(System.Guid)">
+            <summary>
+            Получить информацию о конкретной заметке
+            </summary>
+            <param name="id">идентификатор заметки</param>
+            <returns>вьюха с иноформацией о заметке</returns>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.Create(Notes.WebAPI.Models.CreateNoteDto)">
+            <summary>
+            Создать заметку
+            </summary>
+            <param name="createNoteDto">информация о заметке</param>
+            <returns>идентификатор заметки</returns>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.Update(Notes.WebAPI.Models.UpdateNoteDto)">
+            <summary>
+            Обновить заметку
+            </summary>
+            <param name="updateNoteDto">информация о заметке</param>
+            <returns>ничего</returns>
+        </member>
+        <member name="M:Notes.WebAPI.Controllers.NoteController.Delete(System.Guid)">
+            <summary>
+            Удалить заметку
+            </summary>
+            <param name="id">идентификатор заметкм</param>
+            <returns>ничего</returns>
+        </member>
+        <member name="T:Notes.WebAPI.Models.CreateNoteDto">
+            <summary>
+            Представление для создания Заметки
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Models.CreateNoteDto.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Models.CreateNoteDto.Details">
+            <summary>
+            Детали (содержимое заметки)
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Models.CreateNoteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Выполнить маппинг CreateNoteDto на CreateNoteCommand
+            </summary>
+            <param name="profile">профиль для автомаппинга</param>
+        </member>
+        <member name="T:Notes.WebAPI.Models.UpdateNoteDto">
+            <summary>
+            Представление - Обновить заметку
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Models.UpdateNoteDto.Id">
+            <summary>
+            Идентификатор заметки
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Models.UpdateNoteDto.Title">
+            <summary>
+            Заголовок (название)
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Models.UpdateNoteDto.Details">
+            <summary>
+            Детали (содержимое заметки)
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Models.UpdateNoteDto.Mapping(AutoMapper.Profile)">
+            <summary>
+            Выполнить маппинг UpdateNoteDto на UpdateNoteCommand
+            </summary>
+            <param name="profile">профиль автомаппера</param>
+        </member>
+        <member name="T:Notes.WebAPI.Program">
+            <summary>
+            Главная программа
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Program.Main(System.String[])">
+            <summary>
+            Точка входа
+            </summary>
+            <param name="args">аргументы коммандной строки</param>
+        </member>
+        <member name="M:Notes.WebAPI.Program.AttachDataBase(Microsoft.Extensions.Hosting.IHost)">
+            <summary>
+            Подключить базу данных
+            </summary>
+            <param name="host">хост</param>
+        </member>
+        <member name="M:Notes.WebAPI.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Сконфигурировать хост
+            </summary>
+            <param name="args">аргументы коммандной строки</param>
+            <returns>построитель хоста</returns>
+        </member>
+        <member name="T:Notes.WebAPI.Startup">
+            <summary>
+            Конфигурация приложения
+            </summary>
+        </member>
+        <member name="P:Notes.WebAPI.Startup.Configuration">
+            <summary>
+            Файл конфигурации
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="configuration">конфигурация из файла</param>
+        </member>
+        <member name="M:Notes.WebAPI.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Конфигурация сервисов
+            </summary>
+            <param name="services">коллекция сервисов</param>
+        </member>
+        <member name="M:Notes.WebAPI.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Конфигурация конвеера исполнения
+            </summary>
+            <param name="app">построитель приложений</param>
+            <param name="env">окружение</param>
+        </member>
+    </members>
+</doc>

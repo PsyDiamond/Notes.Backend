@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notes.Persistence</name>
+    </assembly>
+    <members>
+        <member name="T:Notes.Persistence.DbInitializer">
+            <summary>
+            Инициализатор базы данных
+            </summary>
+        </member>
+        <member name="M:Notes.Persistence.DbInitializer.Initializer(Notes.Persistence.NotesDbContext)">
+            <summary>
+            Произвести инициализацию
+            </summary>
+            <param name="context">контекст заметок</param>
+        </member>
+        <member name="T:Notes.Persistence.DependencyInjection">
+            <summary>
+            Класс для метода расширения
+            </summary>
+        </member>
+        <member name="M:Notes.Persistence.DependencyInjection.AddPersistence(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Добавить функции хранения в DI
+            </summary>
+            <param name="services">коллекция сервисов</param>
+            <param name="configuration">конфигурация</param>
+            <returns>коллекция сервисов</returns>
+        </member>
+        <member name="T:Notes.Persistence.EntityTypeConfigurations.NoteConfiguration">
+            <summary>
+            Конфигурация сущности Заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Persistence.EntityTypeConfigurations.NoteConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Notes.Domain.Note})">
+            <summary>
+            Настраивает сущность
+            </summary>
+            <param name="builder">Построитель, который будет использоваться для настройки типа сущности</param>
+        </member>
+        <member name="T:Notes.Persistence.NotesDbContext">
+            <summary>
+            Контекст Заметок
+            </summary>
+        </member>
+        <member name="P:Notes.Persistence.NotesDbContext.Notes">
+            <summary>
+            Заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Persistence.NotesDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Notes.Persistence.NotesDbContext})">
+            <summary>
+            Создание DbContext
+            </summary>
+            <param name="options">опции</param>
+        </member>
+        <member name="M:Notes.Persistence.NotesDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Действие при создании модели
+            </summary>
+            <param name="builder">построитель модели</param>
+        </member>
+    </members>
+</doc>
