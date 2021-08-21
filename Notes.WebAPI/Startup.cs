@@ -7,6 +7,7 @@ using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
+using Notes.WebAPI.Middleware;
 using System.Reflection;
 
 namespace Notes.WebAPI
@@ -73,6 +74,9 @@ namespace Notes.WebAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            // Включает обработку исключений 
+            app.UseCustomExceptionHandler();
+            
             // Включает EndpointRoutingMiddleware
             app.UseRouting();
 
