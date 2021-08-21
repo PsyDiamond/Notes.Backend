@@ -4,6 +4,33 @@
         <name>Notes.Application</name>
     </assembly>
     <members>
+        <member name="T:Notes.Application.Common.Behaviors.ValidationBehavior`2">
+            <summary>
+            Поведение валидатора
+            </summary>
+            <typeparam name="TRequest">запрос</typeparam>
+            <typeparam name="TResponse">ответ</typeparam>
+        </member>
+        <member name="F:Notes.Application.Common.Behaviors.ValidationBehavior`2._validators">
+            <summary>
+            Коллекция валидаторов
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Common.Behaviors.ValidationBehavior`2.#ctor(System.Collections.Generic.IEnumerable{FluentValidation.IValidator{`0}})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="validators">валидаторы</param>
+        </member>
+        <member name="M:Notes.Application.Common.Behaviors.ValidationBehavior`2.Handle(`0,System.Threading.CancellationToken,MediatR.RequestHandlerDelegate{`1})">
+            <summary>
+            Обработать запрос
+            </summary>
+            <param name="request">запрос</param>
+            <param name="cancellationToken">токен отмены</param>
+            <param name="next">следующий обработчик по цепочке</param>
+            <returns></returns>
+        </member>
         <member name="T:Notes.Application.Common.Exceptions.NotFoundException">
             <summary>
             Исключение - Сущность не найдена
@@ -52,7 +79,7 @@
         </member>
         <member name="M:Notes.Application.DependencyInjection.AddApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            Добавить поддержку паттерна Медиатор
+            Конфигурация приложения
             </summary>
             <param name="services">коллекция сервисов</param>
             <returns>коллекция сервисов</returns>
@@ -118,6 +145,16 @@
             <param name="cancellationToken">токен отмены</param>
             <returns>идентификатор заметки</returns>
         </member>
+        <member name="T:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandValidator">
+            <summary>
+            Валидатор создания заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.CreateNote.CreateNoteCommandValidator.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
         <member name="T:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommand">
             <summary>
             Команда - Удалить заметку
@@ -156,6 +193,16 @@
             <param name="request">команда</param>
             <param name="cancellationToken">токен отмены</param>
             <returns>аналог void</returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandValidator">
+            <summary>
+            Валидатор - удаления заметок
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.DeleteCommand.DeleteNoteCommandValidator.#ctor">
+            <summary>
+            Конструктор
+            </summary>
         </member>
         <member name="T:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommand">
             <summary>
@@ -206,6 +253,16 @@
             <param name="cancellationToken">токет отмены</param>
             <returns>аналог void</returns>
         </member>
+        <member name="T:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandValidator">
+            <summary>
+            Валидатор обновления заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Commands.UpdateNote.UpdateNoteCommandValidator.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
         <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQuery">
             <summary>
             Запрос - Детали заметок
@@ -250,6 +307,16 @@
             <param name="request">запрос</param>
             <param name="cancellationToken">токен отмены</param>
             <returns></returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryValidator">
+            <summary>
+            Валидатор - запрос деталей заметки
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteDetails.GetNoteDetailsQueryValidator.#ctor">
+            <summary>
+            Конструктор
+            </summary>
         </member>
         <member name="T:Notes.Application.Notes.Queries.GetNoteDetails.NoteDetailsVm">
             <summary>
@@ -326,6 +393,16 @@
             <param name="request">запрос</param>
             <param name="cancellationToken">токен отмены</param>
             <returns></returns>
+        </member>
+        <member name="T:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryValidator">
+            <summary>
+            Валидатор для запросов - списка заметок
+            </summary>
+        </member>
+        <member name="M:Notes.Application.Notes.Queries.GetNoteList.GetNoteListQueryValidator.#ctor">
+            <summary>
+            Конструктор
+            </summary>
         </member>
         <member name="T:Notes.Application.Notes.Queries.GetNoteList.NoteListVm">
             <summary>

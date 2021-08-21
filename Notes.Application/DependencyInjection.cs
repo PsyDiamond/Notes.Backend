@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Notes.Application.Common.Behaviors;
 using System.Reflection;
 
 namespace Notes.Application
@@ -10,7 +12,7 @@ namespace Notes.Application
     public static class DependencyInjection
     {
         /// <summary>
-        /// Добавить поддержку паттерна Медиатор
+        /// Конфигурация приложения
         /// </summary>
         /// <param name="services">коллекция сервисов</param>
         /// <returns>коллекция сервисов</returns>
@@ -18,6 +20,11 @@ namespace Notes.Application
         {
             // Активировать все медиаторы из текущей сборки
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            // Активировать все валиадторы из текущей сборки
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            // Добавить валидатор, как сервис
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             // Передать управление дальше
             return services;
