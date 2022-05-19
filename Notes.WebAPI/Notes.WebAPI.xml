@@ -74,6 +74,49 @@
             <param name="id">идентификатор заметкм</param>
             <returns>ничего</returns>
         </member>
+        <member name="T:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware">
+            <summary>
+            Компонент midleware - Обработчик исключений
+            </summary>
+        </member>
+        <member name="F:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware._next">
+            <summary>
+            Следующее действие
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="next">Следующее действие</param>
+        </member>
+        <member name="M:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Вызов обработчика
+            </summary>
+            <param name="context">контекст запроса</param>
+            <returns>ничего</returns>
+        </member>
+        <member name="M:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            Обработка исключения
+            </summary>
+            <param name="context">контекст запроса</param>
+            <param name="ex">исключение</param>
+            <returns>ничего</returns>
+        </member>
+        <member name="T:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddlewareExtensions">
+            <summary>
+            Класс для методов расширения
+            </summary>
+        </member>
+        <member name="M:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddlewareExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Включить обработку исключений
+            </summary>
+            <param name="builder">построитель приложения</param>
+            <returns>построитель приложения</returns>
+        </member>
         <member name="T:Notes.WebAPI.Models.CreateNoteDto">
             <summary>
             Представление для создания Заметки
