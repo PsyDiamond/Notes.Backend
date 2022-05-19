@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notes.Application.Notes.Commands.CreateNote;
 using Notes.Application.Notes.Commands.DeleteCommand;
@@ -34,6 +35,7 @@ namespace Notes.WebAPI.Controllers
         /// </summary>
         /// <returns>вьюха с заметками</returns>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<NoteListVm>> GetAll()
         {
             // Создание запроса
@@ -55,6 +57,7 @@ namespace Notes.WebAPI.Controllers
         /// <param name="id">идентификатор заметки</param>
         /// <returns>вьюха с иноформацией о заметке</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<NoteDetailsVm>> Get(Guid id)
         {
             // Создание запроса
@@ -77,6 +80,7 @@ namespace Notes.WebAPI.Controllers
         /// <param name="createNoteDto">информация о заметке</param>
         /// <returns>идентификатор заметки</returns>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDto createNoteDto)
         {
             // Создание команды
@@ -96,6 +100,7 @@ namespace Notes.WebAPI.Controllers
         /// <param name="updateNoteDto">информация о заметке</param>
         /// <returns>ничего</returns>
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody] UpdateNoteDto updateNoteDto)
         {
             // Создание команды
@@ -115,6 +120,7 @@ namespace Notes.WebAPI.Controllers
         /// <param name="id">идентификатор заметкм</param>
         /// <returns>ничего</returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             // Создание команды
