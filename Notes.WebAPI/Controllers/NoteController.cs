@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Notes.Application.Notes.Commands.CreateNote;
 using Notes.Application.Notes.Commands.DeleteCommand;
@@ -16,6 +17,7 @@ namespace Notes.WebAPI.Controllers
     /// КОнтроллер для Заметок
     /// </summary>
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class NoteController : BaseController
     {
         /// <summary>
@@ -33,9 +35,16 @@ namespace Notes.WebAPI.Controllers
         /// <summary>
         /// Получить список заметок
         /// </summary>
+        /// <remarks>Пример использования
+        /// GET /note
+        /// </remarks>
         /// <returns>вьюха с заметками</returns>
+        /// <response code="200">Успешно</response>
+        /// <responce code="401">Нет доступа</responce>
         [HttpGet]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteListVm>> GetAll()
         {
             // Создание запроса
@@ -55,9 +64,16 @@ namespace Notes.WebAPI.Controllers
         /// Получить информацию о конкретной заметке
         /// </summary>
         /// <param name="id">идентификатор заметки</param>
+        /// <remarks>Пример использования:
+        /// GET /note/0E69F2E6-FAFE-454C-AB73-5A879B6B8BDB
+        /// </remarks>
         /// <returns>вьюха с иноформацией о заметке</returns>
+        /// <response code="200">Успешно</response>
+        /// <responce code="401">Нет доступа</responce>
         [HttpGet("{id}")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<NoteDetailsVm>> Get(Guid id)
         {
             // Создание запроса
@@ -78,9 +94,20 @@ namespace Notes.WebAPI.Controllers
         /// Создать заметку
         /// </summary>
         /// <param name="createNoteDto">информация о заметке</param>
+        /// <remarks>Пример использования
+        /// POST /note
+        /// {
+        ///     title: "note title",
+        ///     details: "note details"
+        /// }     
+        /// </remarks>
         /// <returns>идентификатор заметки</returns>
+        /// <response code="201">Успешно</response>
+        /// <responce code="401">Нет доступа</responce>
         [HttpPost]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDto createNoteDto)
         {
             // Создание команды
@@ -98,9 +125,19 @@ namespace Notes.WebAPI.Controllers
         /// Обновить заметку
         /// </summary>
         /// <param name="updateNoteDto">информация о заметке</param>
+        /// <remarks>Пример использования
+        /// PUT /note
+        /// {
+        ///     title: "updated title"
+        /// }
+        /// </remarks>
         /// <returns>ничего</returns>
+        /// <response code="204">Успешно</response>
+        /// <responce code="401">Нет доступа</responce>
         [HttpPut]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Update([FromBody] UpdateNoteDto updateNoteDto)
         {
             // Создание команды
@@ -118,9 +155,16 @@ namespace Notes.WebAPI.Controllers
         /// Удалить заметку
         /// </summary>
         /// <param name="id">идентификатор заметкм</param>
+        /// <remarks>пример использования
+        /// DELETE /note/0E69F2E6-FAFE-454C-AB73-5A879B6B8BDB
+        /// </remarks>
         /// <returns>ничего</returns>
+        /// <response code="204">Успешно</response>
+        /// <responce code="401">Нет доступа</responce>
         [HttpDelete("{id}")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Delete(Guid id)
         {
             // Создание команды

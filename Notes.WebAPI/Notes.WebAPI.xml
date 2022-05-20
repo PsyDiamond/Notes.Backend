@@ -44,35 +44,67 @@
             <summary>
             Получить список заметок
             </summary>
+            <remarks>Пример использования
+            GET /note
+            </remarks>
             <returns>вьюха с заметками</returns>
+            <response code="200">Успешно</response>
+            <responce code="401">Нет доступа</responce>
         </member>
         <member name="M:Notes.WebAPI.Controllers.NoteController.Get(System.Guid)">
             <summary>
             Получить информацию о конкретной заметке
             </summary>
             <param name="id">идентификатор заметки</param>
+            <remarks>Пример использования:
+            GET /note/0E69F2E6-FAFE-454C-AB73-5A879B6B8BDB
+            </remarks>
             <returns>вьюха с иноформацией о заметке</returns>
+            <response code="200">Успешно</response>
+            <responce code="401">Нет доступа</responce>
         </member>
         <member name="M:Notes.WebAPI.Controllers.NoteController.Create(Notes.WebAPI.Models.CreateNoteDto)">
             <summary>
             Создать заметку
             </summary>
             <param name="createNoteDto">информация о заметке</param>
+            <remarks>Пример использования
+            POST /note
+            {
+                title: "note title",
+                details: "note details"
+            }     
+            </remarks>
             <returns>идентификатор заметки</returns>
+            <response code="201">Успешно</response>
+            <responce code="401">Нет доступа</responce>
         </member>
         <member name="M:Notes.WebAPI.Controllers.NoteController.Update(Notes.WebAPI.Models.UpdateNoteDto)">
             <summary>
             Обновить заметку
             </summary>
             <param name="updateNoteDto">информация о заметке</param>
+            <remarks>Пример использования
+            PUT /note
+            {
+                title: "updated title"
+            }
+            </remarks>
             <returns>ничего</returns>
+            <response code="204">Успешно</response>
+            <responce code="401">Нет доступа</responce>
         </member>
         <member name="M:Notes.WebAPI.Controllers.NoteController.Delete(System.Guid)">
             <summary>
             Удалить заметку
             </summary>
             <param name="id">идентификатор заметкм</param>
+            <remarks>пример использования
+            DELETE /note/0E69F2E6-FAFE-454C-AB73-5A879B6B8BDB
+            </remarks>
             <returns>ничего</returns>
+            <response code="204">Успешно</response>
+            <responce code="401">Нет доступа</responce>
         </member>
         <member name="T:Notes.WebAPI.Middleware.CustomExceptionHandlerMiddleware">
             <summary>
