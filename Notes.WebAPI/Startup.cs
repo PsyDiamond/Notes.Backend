@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
 using Notes.WebAPI.Middleware;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
 using System.Reflection;
@@ -77,13 +80,11 @@ namespace Notes.WebAPI
                     options.RequireHttpsMetadata = false;
                 }
                 );
+            services.AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV");
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
 
-            services.AddSwaggerGen(x =>
-            {
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                x.IncludeXmlComments(xmlPath);
-            });
+            services.AddApiVersioning();
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Notes.WebAPI
         /// </summary>
         /// <param name="app">построитель приложений</param>
         /// <param name="env">окружение</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             // Если собрано в Debug - выводить исключения в явном виде
             if (env.IsDevelopment())
@@ -100,8 +101,13 @@ namespace Notes.WebAPI
             app.UseSwagger();
             app.UseSwaggerUI(x =>
             {
+                foreach(var description in provider.ApiVersionDescriptions)
+                {
+                    x.SwaggerEndpoint(
+                        $"/swagger/{description.GroupName}/swagger.json",
+                        description.GroupName.ToUpperInvariant());
+                }
                 x.RoutePrefix = string.Empty;
-                x.SwaggerEndpoint("swagger/v1/swagger.json", "Notes API");
             });
 
             // Включает обработку исключений 
@@ -118,6 +124,8 @@ namespace Notes.WebAPI
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseApiVersioning();
 
             // Включение контроллеров
             app.UseEndpoints(endpoints =>

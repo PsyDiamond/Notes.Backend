@@ -16,8 +16,9 @@ namespace Notes.WebAPI.Controllers
     /// <summary>
     /// КОнтроллер для Заметок
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/{version:apiVersion}/[controller]")]
     [Produces("application/json")]
+    [ApiVersion("1.0")]
     public class NoteController : BaseController
     {
         /// <summary>
