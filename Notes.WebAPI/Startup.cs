@@ -75,6 +75,8 @@ namespace Notes.WebAPI
                     options.RequireHttpsMetadata = false;
                 }
                 );
+
+            services.AddSwaggerGen();
         }
 
         /// <summary>
@@ -87,6 +89,9 @@ namespace Notes.WebAPI
             // Если собрано в Debug - выводить исключения в явном виде
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             // Включает обработку исключений 
             app.UseCustomExceptionHandler();
