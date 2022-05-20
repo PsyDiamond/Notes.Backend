@@ -32,7 +32,7 @@ namespace Notes.Application.Notes.Commands.DeleteCommand
         public async Task<Unit> Handle(DeleteNoteCommand request, CancellationToken cancellationToken)
         {
             // Ищем заметку
-            var entity = await _dbContext.Notes.FindAsync(request.Id, cancellationToken);
+            var entity = await _dbContext.Notes.FindAsync(new object [] { request.Id }, cancellationToken);
 
             // Если не нашли - ругаемся
             if (entity == null || entity.UserId != request.UserId)

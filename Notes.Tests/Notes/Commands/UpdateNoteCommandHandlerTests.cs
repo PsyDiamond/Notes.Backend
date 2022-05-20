@@ -68,7 +68,7 @@ namespace Notes.Tests.Notes.Commands
                 await handler.Handle(new UpdateNoteCommand
                 {
                     Id = NotesContextFactory.NoteIdForUpdate,
-                    UserId = NotesContextFactory.UserBId
+                    UserId = NotesContextFactory.UserAId
                 },
                 CancellationToken.None)
             );

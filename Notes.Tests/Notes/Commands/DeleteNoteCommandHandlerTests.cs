@@ -31,7 +31,7 @@ namespace Notes.Tests.Notes.Commands
                 CancellationToken.None);
 
             // Assert
-            Assert.Null(Context.Notes.SingleOrDefaultAsync(x =>
+            Assert.Null(await Context.Notes.SingleOrDefaultAsync(x =>
             x.Id == NotesContextFactory.NoteIdForDelete));
         }
 
