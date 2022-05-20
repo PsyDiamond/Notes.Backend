@@ -9,6 +9,8 @@ using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
 using Notes.WebAPI.Middleware;
+using System;
+using System.IO;
 using System.Reflection;
 
 namespace Notes.WebAPI
@@ -76,7 +78,12 @@ namespace Notes.WebAPI
                 }
                 );
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(x =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                x.IncludeXmlComments(xmlPath);
+            });
         }
 
         /// <summary>
@@ -91,7 +98,11 @@ namespace Notes.WebAPI
                 app.UseDeveloperExceptionPage();
             
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(x =>
+            {
+                x.RoutePrefix = string.Empty;
+                x.SwaggerEndpoint("swagger/v1/swagger.json", "Notes API");
+            });
 
             // Включает обработку исключений 
             app.UseCustomExceptionHandler();
